@@ -65,6 +65,19 @@ explain()
 ```
 To implement your own wrapper go to ```./explainers/explainer_wrapper.py``` and have a look at the ```CustomExplainer``` class.
 
+## Citation
+If you find our work helpful please consider citing
+```
+@inproceedings{Hesse:2023:FunnyBirds,
+  title     = {FunnyBirds: A Synthetic Vision Dataset for a Part-Based Analysis of Explainable AI Methods},
+  author    = {Hesse, Robin and Schaub-Meyer, Simone and Roth, Stefan},
+  booktitle = {2023 {IEEE/CVF} International Conference on Computer Vision, {ICCV} 2021, Paris, France, October 2-6, 2023},
+  year      = {2023},
+  publisher    = {{IEEE}}, 
+  pages     = ....
+}
+```
+
 
 
 
