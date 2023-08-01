@@ -48,6 +48,12 @@ and chooses the models with the parameters ```--model [resnet50,vgg16] --checkpo
 python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
 python evaluate_explainability.py --data /fastdata/rhesse/datasets/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
 ```
-should now output an accuracy score close to 1.0.
+should now output an accuracy score close to 1.0. If you want to use you own model, you have to _train it_ and _add it to the framework_.
 
+_Train a new model_
+....
+
+_Add a new model to the framework_
+
+**Prepare the explanation method**
 
