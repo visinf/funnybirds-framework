@@ -9,18 +9,18 @@
 
 ## Getting Started
 
-**Download the dataset**
+### Download the dataset
 
 ```
 cd /path/to/dataset/
 wget ...
 ```
 
-**Set up the environment**
+### Set up the environment
 
 
 
-**Clone the repository**
+### Clone the repository
 
 ```
 git clone https://github.com/visinf/funnybirds-framework.git
@@ -36,7 +36,7 @@ python evaluate_explainability.py --data /fastdata/rhesse/datasets/FunnyBirds --
 
 This simply evaluates the accuracy of a randomly initialized ResNet-50 and should output something like "...". If this is working, we can already continue with setting up the actual evaluation. In the FunnyBirds framework each method is a combination of a model and an explanation method.
 
-**Prepare the model**
+### Prepare the model
 
 If you want to evaluate a post-hoc explanation method on the standard models ResNet-50 or VGG16, you can simple download our model weights 
 ```
@@ -48,12 +48,23 @@ and chooses the models with the parameters ```--model [resnet50,vgg16] --checkpo
 python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
 python evaluate_explainability.py --data /fastdata/rhesse/datasets/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
 ```
-should now output an accuracy score close to 1.0. If you want to use you own model, you have to _train it_ and _add it to the framework_.
+should now output an accuracy score close to 1.0. If you want to use you own model, you have to **train it** and **add it to the framework**.
 
-_Train a new model_
+#### Train a new model
 ....
 
-_Add a new model to the framework_
+#### Add a new model to the framework
 
-**Prepare the explanation method**
+### Prepare the explanation method
+
+Each explanation method is wrapped in an explainer_wrapper that implements the interface functions and the function to generate the explanation:
+```python
+get_important_parts()
+get_part_importance()
+explain()
+```
+To implement your own wrapper go to ```./explainers/explainer_wrapper.py``` and have a look at the ```CustomExplainer``` class.
+
+
+
 
