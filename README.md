@@ -27,6 +27,8 @@ conda create --name funnybirds-framework python=3.7
 conda activate funnybirds-framework
 conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
 conda install captum -c pytorch
+conda install -c conda-forge tqdm
+conda install -c anaconda scipy
 ```
 
 ### Clone the repository
@@ -40,10 +42,15 @@ After following the above steps, you can test if everything is properly set up b
 
 ```
 python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
-python evaluate_explainability.py --data /fastdata/rhesse/datasets/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
+python evaluate_explainability.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
 ```
 
-This simply evaluates the accuracy of a randomly initialized ResNet-50 and should output something like "...". If this is working, we can already continue with setting up the actual evaluation. In the FunnyBirds framework each method is a combination of a model and an explanation method.
+This simply evaluates the accuracy of a randomly initialized ResNet-50 and should output something like 
+```
+Acc@1   0.00 (  1.00)
+Acc@5   0.00 ( 10.00)
+```
+followed by an error (because all metrics must be evaluate to complete the script). If this is working, we can already continue with setting up the actual evaluation. In the FunnyBirds framework each method is a combination of a model and an explanation method.
 
 ### Prepare the model
 
