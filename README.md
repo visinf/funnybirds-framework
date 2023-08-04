@@ -107,6 +107,7 @@ Don't forget to adjust the hyperparameters accordingly.
 #### Add a new model to the framework
 
 To add the model to the framework you first have to go to ```./models/modelwrapper.py``` and define a new class for your model that implements a ```forward()``` function and a ```load_state_dict()``` function (if ```StandardModel``` does not work for you). For examples you can refer to ```StandardModel``` or to the complete FunnyBirds repository.
+Next, you have to add the model to the choices list and the available models in ```evaluate_explainability.py``` as was done in [Train a new model](https://github.com/visinf/funnybirds-framework/tree/main#train-a-new-model).
 
 ### Prepare the explanation method
 
