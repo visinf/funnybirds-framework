@@ -119,7 +119,25 @@ explain()
 ```
 To implement your own wrapper, go to ```./explainers/explainer_wrapper.py``` and have a look at the ```CustomExplainer``` class. Here you can add your own explainer. If you want to evaluate an attribution method, simply let ```CustomExplainer``` inherit from ```AbstractAttributionExplainer``` and implement ```explain()``` and maybe ```__init__()```. If you want to evaluate another explanation type you also have to implement ```get_important_parts()``` and/or ```get_part_importance()```. For examples you can refer to the full [FunnyBirds repository](https://github.com/visinf/funnybirds) or the provided ```CaptumAttributionExplainer```.
 
-TODO: ADD DESCRIPTION OF WHAT INPUT AND OUTPUT OF INTERFACE FUNCTIONS IS
+The inputs and outputs of the interface functions ```get_part_importance()``` and ```get_important_parts()``` are described as comments in the code.
+
+Finally, you have to add your CustomExplainer to the ```evaluate_explainbility.py``` script by instantiating it in:
+```python
+elif args.explainer == 'CustomExplainer':
+    ...
+```
+
+### Run the evaluation
+
+If you have successfully followed all of the above steps you should be able to run the evaluation using the following command:
+```
+python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model your_model --checkpoint_name /path/to/models/your_model_checkpoint_best.pth.tar --explainer CustomExplainer --accuracy --controlled_synthetic_data_check --target_sensitivity --single_deletion --preservation_check --deletion_check --distractibility --background_independence --gpu 0
+```
+The evaluation for ResNet-50 with InputXGradient can be run with:
+```
+python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --checkpoint_name /path/to/models/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --controlled_synthetic_data_check --target_sensitivity --single_deletion --preservation_check --deletion_check --distractibility --background_independence --gpu 0
+python evaluate_explainability.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds --model resnet50 --checkpoint_name /data/rhesse/funnybirds-framework/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --controlled_synthetic_data_check --target_sensitivity --single_deletion --preservation_check --deletion_check --distractibility --background_independence --gpu 0 
+```
 
 ## Citation
 If you find our work helpful please consider citing
