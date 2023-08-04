@@ -57,12 +57,13 @@ followed by an error (because all metrics must be evaluate to complete the scrip
 If you want to evaluate a post-hoc explanation method on the standard models ResNet-50 or VGG16, you can simple download our model weights 
 ```
 cd /path/to/models/
-wget ...
+wget download.visinf.tu-darmstadt.de/data/funnybirds/models/resnet50_final_0_checkpoint_best.pth.tar
+wget download.visinf.tu-darmstadt.de/data/funnybirds/models/vgg16_final_1_checkpoint_best.pth.tar
 ```
-and chooses the models with the parameters ```--model [resnet50,vgg16] --checkpoint_name /path/to/models/model.pth.tar```. To verify this, running again
+and choose the models with the parameters ```--model [resnet50,vgg16] --checkpoint_name /path/to/models/model.pth.tar```. To verify this, running again
 ```
-python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
-python evaluate_explainability.py --data /fastdata/rhesse/datasets/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
+python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --checkpoint_name /path/to/models/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --gpu 0
+python evaluate_explainability.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds --model resnet50 --checkpoint_name /data/rhesse/funnybirds-framework/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --gpu 0
 ```
 should now output an accuracy score close to 1.0. If you want to use you own model, you have to **train it** and **add it to the framework**.
 
