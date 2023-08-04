@@ -106,6 +106,8 @@ Don't forget to adjust the hyperparameters accordingly.
 
 #### Add a new model to the framework
 
+To add the model to the framework you first have to go to ```./models/modelwrapper.py``` and define a new class for your model that implements a ```forward()``` function and a ```load_state_dict()``` function (if ```StandardModel``` does not work for you). For examples you can refer to ```StandardModel``` or to the complete FunnyBirds repository.
+
 ### Prepare the explanation method
 
 Each explanation method is wrapped in an explainer_wrapper that implements the interface functions and the function to generate the explanation:
