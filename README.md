@@ -11,14 +11,23 @@
 
 ### Download the dataset
 
+The dataset requires ~1.6GB free disk space.
 ```
 cd /path/to/dataset/
-wget ...
+wget download.visinf.tu-darmstadt.de/data/funnybirds/FunnyBirds.zip
+unzip FunnyBirds.zip
+rm FunnyBirds.zip
 ```
 
 ### Set up the environment
 
-
+If you use conda you can create your environment as shown below:
+```
+conda create --name funnybirds-framework python=3.7
+conda activate funnybirds-framework
+conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
+conda install captum -c pytorch
+```
 
 ### Clone the repository
 
