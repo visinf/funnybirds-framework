@@ -68,7 +68,31 @@ python evaluate_explainability.py --data /fastdata/rhesse/datasets/funnybirds-fr
 should now output an accuracy score close to 1.0. If you want to use you own model, you have to **train it** and **add it to the framework**.
 
 #### Train a new model
-....
+
+For training your own model please use ```train.py```.
+
+First enter your model name to the list of valid choices of the --model argument of the parser:
+```
+choices=['resnet50', 'vgg16']
+-->
+choices=['resnet50', 'vgg16', 'your_model']
+```
+Next, instanciate your model, load the ImageNet weights, and change the output dimension to 50, e.g.:
+```
+# create model
+if args.model == 'resnet50':
+    model = resnet50(pretrained=args.pretrained)
+    model.fc = torch.nn.Linear(2048, 50)
+elif args.model == 'vgg16':
+    model = vgg16(pretrained=args.pretrained)
+    model.classifier[-1] = torch.nn.Linear(4096, 50)
+elif args.model == 'your_model':
+    model = your_model()
+    model.load_state_dict(torch.load('path/to/your/model_weights'))
+    model.classifier[-1] = torch.nn.Linear(XXX, 50)
+else:
+    print('Model not implemented')
+```
 
 #### Add a new model to the framework
 
