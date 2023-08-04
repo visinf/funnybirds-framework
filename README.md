@@ -78,7 +78,7 @@ choices=['resnet50', 'vgg16']
 choices=['resnet50', 'vgg16', 'your_model']
 ```
 Next, instanciate your model, load the ImageNet weights, and change the output dimension to 50, e.g.:
-```
+```python
 # create model
 if args.model == 'resnet50':
     model = resnet50(pretrained=args.pretrained)
@@ -93,6 +93,14 @@ elif args.model == 'your_model':
 else:
     print('Model not implemented')
 ```
+
+Now you can train your model by calling
+```
+python train.py --data /path/to/dataset/FunnyBirds --model resnet50 --checkpoint_dir /path/to/models/ --checkpoint_prefix your_model --gpu 0 --multi_target --pretrained --seed 0
+
+python train.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds/ --model resnet50 --checkpoint_dir /data/rhesse/funnybirds-framework/ --checkpoint_prefix resnet50_framework --gpu 0 --multi_target --pretrained --seed 0
+```
+Don't forget to adjust the hyperparameters accordingly.
 
 #### Add a new model to the framework
 
