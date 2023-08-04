@@ -96,7 +96,7 @@ else:
 
 Now you can train your model by calling
 ```
-python train.py --data /path/to/dataset/FunnyBirds --model resnet50 --checkpoint_dir /path/to/models/ --checkpoint_prefix your_model --gpu 0 --multi_target --pretrained --seed 0
+python train.py --data /path/to/dataset/FunnyBirds --model your_model --checkpoint_dir /path/to/models/ --checkpoint_prefix your_model --gpu 0 --multi_target --pretrained --seed 0
 
 python train.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds/ --model resnet50 --checkpoint_dir /data/rhesse/funnybirds-framework/ --checkpoint_prefix resnet50_framework --gpu 0 --multi_target --pretrained --seed 0
 ```
