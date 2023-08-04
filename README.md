@@ -9,7 +9,7 @@
 
 ## Getting Started
 
-The following section provides a very detailed description of how to use the FunnyBirds framework. Even if the instructions might seem a bit long and intimidating, most of the steps are finished very quickly. So don't lose hope and if you ahve recommendations how to improve the framework or the instructions, we would be grateful for your feedback.
+The following section provides a very detailed description of how to use the FunnyBirds framework. Even if the instructions might seem a bit long and intimidating, most of the steps are finished very quickly. So don't lose hope and if you have recommendations on how to improve the framework or the instructions, we would be grateful for your feedback.
 
 ### Download the dataset
 
