@@ -160,6 +160,11 @@ Accuracy, CSDC, PC, DC, Distractability, Background independence, SD, TS
 Best threshold: 0.01620253164556962
 ```
 
+#### Plot your results
+To obtain the spider plots used in our paper, simply add your results to line 10 of plot_results.py and run the script. The result is stored in plot.png and should look like this:
+
+
+
 ## Citation
 If you find our work helpful please consider citing
 ```
