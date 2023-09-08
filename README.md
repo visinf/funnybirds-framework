@@ -67,7 +67,7 @@ and choose the models with the parameters ```--model [resnet50,vgg16] --checkpoi
 python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --checkpoint_name /path/to/models/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --gpu 0
 python evaluate_explainability.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds --model resnet50 --checkpoint_name /data/rhesse/funnybirds-framework/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --gpu 0
 ```
-should now output an accuracy score close to 1.0. If you want to use you own model, you have to **train it** and **add it to the framework**.
+should now output an accuracy score close to 1.0. If you want to use your own model, you have to **train it** and **add it to the framework**.
 
 #### Train a new model
 
@@ -79,7 +79,7 @@ choices=['resnet50', 'vgg16']
 -->
 choices=['resnet50', 'vgg16', 'your_model']
 ```
-Next, instanciate your model, load the ImageNet weights, and change the output dimension to 50, e.g.:
+Next, instantiate your model, load the ImageNet weights, and change the output dimension to 50, e.g.:
 ```python
 # create model
 if args.model == 'resnet50':
