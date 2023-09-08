@@ -151,6 +151,15 @@ python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model res
 python evaluate_explainability.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds --model resnet50 --checkpoint_name /data/rhesse/funnybirds-framework/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --controlled_synthetic_data_check --target_sensitivity --single_deletion --preservation_check --deletion_check --distractibility --background_independence --gpu 0 
 ```
 
+and should result in 
+
+```
+FINAL RESULTS:
+Accuracy, CSDC, PC, DC, Distractability, Background independence, SD, TS
+0.998   0.7353  0.602   0.532   0.54372 0.99826 0.54592 0.806
+Best threshold: 0.01620253164556962
+```
+
 ## Citation
 If you find our work helpful please consider citing
 ```
