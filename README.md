@@ -122,12 +122,12 @@ To implement your own wrapper, go to ```./explainers/explainer_wrapper.py``` and
 The inputs and outputs of the interface functions ```get_part_importance()``` and ```get_important_parts()``` are defined as:
 
 Inputs:
-- image: The input image. Torch tensor of size ```[1, 3, 256, 256]```.
-- part_map: The corresponding segmentation map where one color denotes one part. Torch tensor of size ```[1, 3, 256, 256]```.
-- target: The target class. Torch tensor of size ```[1]```.
-- colors_to_part: A list that maps colors to parts. Dictionary: ```{(255, 255, 253): 'eye01', (255, 255, 254): 'eye02', (255, 255, 0): 'beak', (255, 0, 1): 'foot01', (255, 0, 2): 'foot02', (0, 255, 1): 'wing01', (0, 255, 2): 'wing02', (0, 0, 255): 'tail'}```
-- thresholds: The different thresholds to use to estimate which parts are important. Numpy array of size ```(80,)```.
-- with_bg: Include the background parts in the computation. Boolean
+- ```image```: The input image. Torch tensor of size ```[1, 3, 256, 256]```.
+- ```part_map```: The corresponding segmentation map where one color denotes one part. Torch tensor of size ```[1, 3, 256, 256]```.
+- ```target```: The target class. Torch tensor of size ```[1]```.
+- ```colors_to_part```: A list that maps colors to parts. Dictionary: ```{(255, 255, 253): 'eye01', (255, 255, 254): 'eye02', (255, 255, 0): 'beak', (255, 0, 1): 'foot01', (255, 0, 2): 'foot02', (0, 255, 1): 'wing01', (0, 255, 2): 'wing02', (0, 0, 255): 'tail'}```
+- ```thresholds```: The different thresholds to use to estimate which parts are important. Numpy array of size ```(80,)```.
+- ```with_bg```: Include the background parts in the computation. Boolean
 
 Outputs:
 - ```get_important_parts()``` A list with the same length as the number of thresholds (we get one result per threshold). Each inner list contains the strings of the parts that are estimated to be important by the explanation, e.g., ```['eye', 'beak', 'foot', 'wing', 'tail']```.
