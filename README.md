@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Framework](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?&logo=PyTorch&logoColor=white)](https://pytorch.org/)
+
 > :warning: **Disclaimer**: This repository provides the minimal working code to run your own evaluations on the FunnyBirds framework. If you are looking for other components of our work, e.g., the dataset rendering, the custom evaluations, or the framework code for all methods, please see [here](https://github.com/visinf/funnybirds). However, if you just want to run the framework evaluation, we recommend using this repository.
 
 
@@ -161,12 +162,12 @@ To obtain the spider plots used in our paper, simply add your results to line 10
 <img src="https://github.com/visinf/funnybirds-framework/blob/main/resources/plot.png" width="256">
 
 ## Citation
-If you find our work helpful please consider citing
+If you find our work helpful, please consider citing
 ```
 @inproceedings{Hesse:2023:FunnyBirds,
-  title     = {FunnyBirds: A Synthetic Vision Dataset for a Part-Based Analysis of Explainable AI Methods},
+  title     = {Funny{B}irds: {A} Synthetic Vision Dataset for a Part-Based Analysis of Explainable {AI} Methods},
   author    = {Hesse, Robin and Schaub-Meyer, Simone and Roth, Stefan},
-  booktitle = {2023 {IEEE/CVF} International Conference on Computer Vision, {ICCV} 2021, Paris, France, October 2-6, 2023},
+  booktitle = {2023 {IEEE/CVF} International Conference on Computer Vision (ICCV), Paris, France, October 2-6, 2023},
   year      = {2023},
   publisher = {{IEEE}}, 
   pages     = ....
