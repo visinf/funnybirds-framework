@@ -44,7 +44,6 @@ After following the above steps, you can test if everything is properly set up b
 
 ```
 python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
-python evaluate_explainability.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds --model resnet50 --explainer InputXGradient --accuracy --gpu 0
 ```
 
 This simply evaluates the accuracy of a randomly initialized ResNet-50 and should output something like 
@@ -65,7 +64,6 @@ wget download.visinf.tu-darmstadt.de/data/funnybirds/models/vgg16_final_1_checkp
 and choose the models with the parameters ```--model [resnet50,vgg16] --checkpoint_name /path/to/models/model.pth.tar```. To verify this, running again
 ```
 python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --checkpoint_name /path/to/models/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --gpu 0
-python evaluate_explainability.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds --model resnet50 --checkpoint_name /data/rhesse/funnybirds-framework/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --gpu 0
 ```
 should now output an accuracy score close to 1.0. If you want to use your own model, you have to **train it** and **add it to the framework**.
 
@@ -99,8 +97,6 @@ else:
 Now you can train your model by calling
 ```
 python train.py --data /path/to/dataset/FunnyBirds --model your_model --checkpoint_dir /path/to/models/ --checkpoint_prefix your_model --gpu 0 --multi_target --pretrained --seed 0
-
-python train.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds/ --model resnet50 --checkpoint_dir /data/rhesse/funnybirds-framework/ --checkpoint_prefix resnet50_framework --gpu 0 --multi_target --pretrained --seed 0
 ```
 Don't forget to adjust the hyperparameters accordingly.
 
@@ -148,7 +144,6 @@ python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model you
 The evaluation for ResNet-50 with InputXGradient can be run with:
 ```
 python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --checkpoint_name /path/to/models/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --controlled_synthetic_data_check --target_sensitivity --single_deletion --preservation_check --deletion_check --distractibility --background_independence --gpu 0
-python evaluate_explainability.py --data /fastdata/rhesse/datasets/funnybirds-framework/FunnyBirds --model resnet50 --checkpoint_name /data/rhesse/funnybirds-framework/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --controlled_synthetic_data_check --target_sensitivity --single_deletion --preservation_check --deletion_check --distractibility --background_independence --gpu 0 
 ```
 
 and should result in 
