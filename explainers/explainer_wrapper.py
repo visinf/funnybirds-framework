@@ -70,9 +70,7 @@ class AbstractAttributionExplainer(AbstractExplainer):
     # with_bg: include the background parts in the computation
     def get_part_importance(self, image, part_map, target, colors_to_part, with_bg = False):
         """
-        Outputs parts of the bird that are important according to the explanation.
-        This must be reimplemented for different explanation types.
-        Output is of the form: ['beak', 'wing', 'tail']
+        Outputs part importances for each part.
         """
         assert image.shape[0] == 1 # B = 1
         attribution = self.explain(image, target=target)
