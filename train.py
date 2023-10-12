@@ -54,11 +54,6 @@ parser.add_argument('--seed', default=0, type=int,
 parser.add_argument('--gpu', default=0, type=int,
                     help='GPU id to use.')
 
-parser.add_argument('--background', type=str, default=None,
-                    help='path to bg image')
-parser.add_argument('--background_plus_foreground', type=str, default=None,
-                    help='path to bg image')
-
 best_acc1 = 0
 
 def main():
