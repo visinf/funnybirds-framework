@@ -8,6 +8,8 @@
 
 [R. Hesse](https://robinhesse.github.io/), [S. Schaub-Meyer](https://schaubsi.github.io/), and [S. Roth](https://www.visinf.tu-darmstadt.de/visual_inference/people_vi/stefan_roth.en.jsp). **FunnyBirds: A Synthetic Vision Dataset for a Part-Based Analysis of Explainable AI Methods**. _ICCV_, 2023, **oral presentation**.
 
+[Paper](https://openaccess.thecvf.com/content/ICCV2023/html/Hesse_FunnyBirds_A_Synthetic_Vision_Dataset_for_a_Part-Based_Analysis_of_ICCV_2023_paper.html) | [ArXiv](https://arxiv.org/abs/2308.06248) | [Video](https://www.youtube.com/watch?v=rOc-Wd4FN1E&t)
+
 ## Getting Started
 
 The following section provides a very detailed description of how to use the FunnyBirds framework. Even if the instructions might seem a bit long and intimidating, most of the steps are finished very quickly. So don't lose hope and if you have recommendations on how to improve the framework or the instructions, we would be grateful for your feedback.
@@ -170,7 +172,7 @@ If you find our work helpful, please consider citing
   booktitle = {2023 {IEEE/CVF} International Conference on Computer Vision (ICCV), Paris, France, October 2-6, 2023},
   year      = {2023},
   publisher = {{IEEE}}, 
-  pages     = ....
+  pages     = {3981-3991}
 }
 ```
 
