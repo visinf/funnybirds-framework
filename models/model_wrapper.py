@@ -47,3 +47,17 @@ class StandardModel(AbstractModel):
 
     def load_state_dict(self, state_dict):
         self.model.load_state_dict(state_dict)
+
+class ViTModel(AbstractModel):
+    """
+    A wrapper for ViT models.
+    Args:
+        model: PyTorch neural network model
+    """
+
+    def forward(self, input):
+        input = nn.functional.interpolate(input, (224,224)) # ViT expects input of size 224x224
+        return self.model(input)
+
+    def load_state_dict(self, state_dict):
+        self.model.load_state_dict(state_dict)

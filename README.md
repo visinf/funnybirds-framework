@@ -34,6 +34,8 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvi
 conda install captum -c pytorch
 conda install -c conda-forge tqdm
 conda install -c anaconda scipy
+conda install conda-forge::einops=0.6.1
+conda install anaconda::pillow
 ```
 
 ### Clone the repository
@@ -58,13 +60,14 @@ followed by an error (because all metrics must be evaluate to complete the scrip
 
 ### Prepare the model
 
-If you want to evaluate a post-hoc explanation method on the standard models ResNet-50 or VGG16, you can simple download our model weights 
+If you want to evaluate a post-hoc explanation method on the standard models ResNet-50, VGG16, or ViT, you can simply download our model weights 
 ```
 cd /path/to/models/
 wget download.visinf.tu-darmstadt.de/data/funnybirds/models/resnet50_final_0_checkpoint_best.pth.tar
 wget download.visinf.tu-darmstadt.de/data/funnybirds/models/vgg16_final_1_checkpoint_best.pth.tar
+wget download.visinf.tu-darmstadt.de/data/funnybirds/models/vit_base_patch16_224_final_1_checkpoint_best.pth.tar
 ```
-and choose the models with the parameters ```--model [resnet50,vgg16] --checkpoint_name /path/to/models/model.pth.tar```. To verify this, running again
+and choose the models with the parameters ```--model [resnet50,vgg16, vit_b_16] --checkpoint_name /path/to/models/model.pth.tar```. To verify this, running again
 ```
 python evaluate_explainability.py --data /path/to/dataset/FunnyBirds --model resnet50 --checkpoint_name /path/to/models/resnet50_final_0_checkpoint_best.pth.tar --explainer InputXGradient --accuracy --gpu 0
 ```
@@ -76,9 +79,9 @@ For training your own model please use ```train.py```.
 
 First enter your model name to the list of valid choices of the --model argument of the parser:
 ```
-choices=['resnet50', 'vgg16']
+choices=['resnet50', 'vgg16', ...]
 -->
-choices=['resnet50', 'vgg16', 'your_model']
+choices=['resnet50', 'vgg16', ..., 'your_model']
 ```
 Next, instantiate your model, load the ImageNet weights, and change the output dimension to 50, e.g.:
 ```python
@@ -89,6 +92,7 @@ if args.model == 'resnet50':
 elif args.model == 'vgg16':
     model = vgg16(pretrained=args.pretrained)
     model.classifier[-1] = torch.nn.Linear(4096, 50)
+elif ...
 elif args.model == 'your_model':
     model = your_model()
     model.load_state_dict(torch.load('path/to/your/model_weights'))
@@ -116,6 +120,9 @@ get_important_parts()
 get_part_importance()
 explain()
 ```
+
+Currently, the code supports the explainers InputXGradient, Integrated Gradients, and the ViT specific methods Rollout and CheferLRP.
+
 To implement your own wrapper, go to ```./explainers/explainer_wrapper.py``` and have a look at the ```CustomExplainer``` class. Here you can add your own explainer. If you want to evaluate an attribution method, simply let ```CustomExplainer``` inherit from ```AbstractAttributionExplainer``` and implement ```explain()``` and maybe ```__init__()```. If you want to evaluate another explanation type you also have to implement ```get_important_parts()``` and/or ```get_part_importance()```. For examples you can refer to the full [FunnyBirds repository](https://github.com/visinf/funnybirds) or the provided ```CaptumAttributionExplainer```.
 
 The inputs and outputs of the interface functions ```get_part_importance()``` and ```get_important_parts()``` are defined as:

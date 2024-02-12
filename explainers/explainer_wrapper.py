@@ -1,8 +1,14 @@
 import torch
 import torch.nn as nn
+from torchvision import transforms
+
 import numpy as np
 from abc import abstractmethod
 from captum.attr import LayerAttribution
+from PIL import Image
+
+from models.ViT.ViT_explanation_generator import Baselines, LRP
+
 
 class AbstractExplainer():
     def __init__(self, explainer, baseline = None):
@@ -129,7 +135,49 @@ class CaptumAttributionExplainer(AbstractAttributionExplainer):
         elif self.explainer_name == 'IntegratedGradients':
             return self.explainer.attribute(input, target=target, baselines=self.baseline, n_steps=50)
 
+class ViTGradCamExplainer(AbstractAttributionExplainer):
+    def __init__(self, model):
+        self.model = model
+        self.explainer = Baselines(self.model.model)
 
+    def explain(self, input, target):
+        B,C,H,W = input.shape
+        assert B == 1
+        input_ = torch.nn.functional.interpolate(input, (224,224))
+        attribution = self.explainer.generate_cam_attn(input_, index=target).reshape(1, 1, 14, 14)
+        m = transforms.Resize((H,W), interpolation=Image.NEAREST)
+        attribution = m(attribution)
+        print(attribution.shape)
+        return attribution
+    
+class ViTRolloutExplainer(AbstractAttributionExplainer):
+    def __init__(self, model):
+        self.model = model
+        self.explainer = Baselines(self.model.model)
+
+    def explain(self, input, target):
+        B,C,H,W = input.shape
+        assert B == 1
+        input_ = torch.nn.functional.interpolate(input, (224,224))
+        attribution = self.explainer.generate_rollout(input_, start_layer=1).reshape(1, 1, 14, 14)
+        m = transforms.Resize((H,W), interpolation=Image.NEAREST)
+        attribution = m(attribution)
+        return attribution
+
+class ViTCheferLRPExplainer(AbstractAttributionExplainer):
+    def __init__(self, model):
+        self.model = model
+        self.explainer = LRP(self.model.model)
+
+    def explain(self, input, target):
+        B,C,H,W = input.shape
+        assert B == 1
+        input_ = torch.nn.functional.interpolate(input, (224,224))
+        attribution = self.explainer.generate_LRP(input_, index=target, start_layer=1, method="transformer_attribution").reshape(1, 1, 14, 14)
+        m = transforms.Resize((H,W), interpolation=Image.NEAREST)
+        attribution = m(attribution)
+        return attribution
+    
 class CustomExplainer(AbstractExplainer):
 
     def explain(self, input):

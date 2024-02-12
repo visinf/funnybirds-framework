@@ -6,19 +6,21 @@ from captum.attr import IntegratedGradients, InputXGradient
 
 from models.resnet import resnet50
 from models.vgg import vgg16
-from models.model_wrapper import StandardModel
+from models.ViT.ViT_new import vit_base_patch16_224
+from models.ViT.ViT_LRP import vit_base_patch16_224 as vit_LRP
+from models.model_wrapper import StandardModel, ViTModel
 from evaluation_protocols import accuracy_protocol, controlled_synthetic_data_check_protocol, single_deletion_protocol, preservation_check_protocol, deletion_check_protocol, target_sensitivity_protocol, distractibility_protocol, background_independence_protocol
-from explainers.explainer_wrapper import CaptumAttributionExplainer, CustomExplainer
+from explainers.explainer_wrapper import CaptumAttributionExplainer, ViTGradCamExplainer, ViTRolloutExplainer, ViTCheferLRPExplainer, CustomExplainer
 
 
 parser = argparse.ArgumentParser(description='FunnyBirds - Explanation Evaluation')
 parser.add_argument('--data', metavar='DIR', required=True,
                     help='path to dataset (default: imagenet)')
 parser.add_argument('--model', required=True,
-                    choices=['resnet50', 'vgg16'],
+                    choices=['resnet50', 'vgg16', 'vit_b_16'],
                     help='model architecture')
 parser.add_argument('--explainer', required=True,
-                    choices=['IntegratedGradients', 'InputXGradient', 'CustomExplainer'],
+                    choices=['IntegratedGradients', 'InputXGradient', 'Rollout', 'CheferLRP', 'CustomExplainer'],
                     help='explainer')
 parser.add_argument('--checkpoint_name', type=str, required=False, default=None,
                     help='checkpoint name (including dir)')
@@ -66,6 +68,12 @@ def main():
     elif args.model == 'vgg16':
         model = vgg16(num_classes = 50)
         model = StandardModel(model)
+    elif args.model == 'vit_b_16':
+        if args.explainer == 'CheferLRP':
+            model = vit_LRP(num_classes=50)
+        else:
+            model = vit_base_patch16_224(num_classes = 50)
+        model = ViTModel(model)
     else:
         print('Model not implemented')
     
@@ -82,6 +90,10 @@ def main():
         explainer = IntegratedGradients(model)
         baseline = torch.zeros((1,3,256,256)).to(device)
         explainer = CaptumAttributionExplainer(explainer, baseline=baseline)
+    elif args.explainer == 'Rollout':
+        explainer = ViTRolloutExplainer(model)
+    elif args.explainer == 'CheferLRP':
+        explainer = ViTCheferLRPExplainer(model)
     elif args.explainer == 'CustomExplainer':
         ...
     else:
