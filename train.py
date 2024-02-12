@@ -15,12 +15,13 @@ from torch.optim.lr_scheduler import StepLR
 from datasets.funny_birds import FunnyBirds
 from models.resnet import resnet50
 from models.vgg import vgg16
+from models.ViT.ViT_new import vit_base_patch16_224
 
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
 parser.add_argument('--data', metavar='DIR', required=True,
                     help='path to dataset (default: imagenet)')
 parser.add_argument('--model', required=True,
-                    choices=['resnet50', 'vgg16'],
+                    choices=['resnet50', 'vgg16', 'vit_b_16'],
                     help='model architecture')
 parser.add_argument('--checkpoint_dir', metavar='DIR', required=True, default=None,
                     help='path to checkpoints')
@@ -82,6 +83,9 @@ def main():
     elif args.model == 'vgg16':
         model = vgg16(pretrained=args.pretrained)
         model.classifier[-1] = torch.nn.Linear(4096, 50)
+    elif args.model == 'vit_b_16':
+        model = vit_base_patch16_224(pretrained=args.pretrained)
+        model.head = torch.nn.Linear(768, 50)
     else:
         print('Model not implemented')
 
