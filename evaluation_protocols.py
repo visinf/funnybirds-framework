@@ -342,13 +342,6 @@ def deletion_check_protocol(model, explainer, args):
     for threshold in thresholds:
         scores_for_thresholds[threshold] = sum(scores_for_thresholds[threshold]) / len(scores_for_thresholds[threshold])
     
-    riemann_sum = 0   
-    for i, threshold in enumerate(thresholds): # left riemann sum
-        if i == 0:
-            riemann_sum += thresholds[i] * scores_for_thresholds[threshold]
-        else:
-            riemann_sum += (thresholds[i] - thresholds[i-1]) * scores_for_thresholds[threshold]
-   
     print('Deletion Check Scores: ', scores_for_thresholds)
     return scores_for_thresholds
 
